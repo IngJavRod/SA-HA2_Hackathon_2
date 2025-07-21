@@ -44,28 +44,40 @@ public class Agenda {
     }
     // Método para buscar un contacto
     public void buscarContacto(String nombre, String apellido) {
-        Contacto c = new Contacto(nombre, apellido, "");
-        if (contactos.contains(c)) {
-            System.out.println("Contacto encontrado: " + c);
+        // Creamos un contacto con el mismo nombre y apellido (sin importar teléfono)
+        Contacto contactoBuscado = new Contacto(nombre, apellido, "");
+
+        // Usamos contains para verificar si el contacto existe en la lista (basado en el método equals())
+        if (contactos.contains(contactoBuscado)) {
+            for (Contacto c : contactos) {
+                if (c.equals(contactoBuscado)) { // Compara solo nombre y apellido
+                    System.out.println("Contacto encontrado: " + c);
+                    return;
+                }
+            }
         } else {
             System.out.println("Contacto no encontrado.");
         }
     }
 
+
     // Método para eliminar un contacto
     public void eliminarContacto(Contacto c) {
-        if (contactos.remove(c)) {
+        // Usamos equals solo para comparar nombre y apellido
+        if (contactos.removeIf(contacto -> contacto.equals(c))) {
             System.out.println("Contacto eliminado.");
         } else {
             System.out.println("Este contacto no existe.");
         }
     }
 
+
     // Método para modificar teléfono de un contacto
     public void modificarTelefono(String nombre, String apellido, String nuevoTelefono) {
         for (Contacto c : contactos) {
+            // Si encontramos el contacto por nombre y apellido
             if (c.getNombre().equalsIgnoreCase(nombre) && c.getApellido().equalsIgnoreCase(apellido)) {
-                c = new Contacto(nombre, apellido, nuevoTelefono);
+                c.setTelefono(nuevoTelefono); // Modificamos el teléfono directamente
                 System.out.println("Teléfono modificado.");
                 return;
             }
