@@ -42,5 +42,44 @@ public class Agenda {
             .sorted((c1, c2) -> c1.toString().compareToIgnoreCase(c2.toString()))
             .forEach(System.out::println);
     }
+    // Método para buscar un contacto
+    public void buscarContacto(String nombre, String apellido) {
+        Contacto c = new Contacto(nombre, apellido, "");
+        if (contactos.contains(c)) {
+            System.out.println("Contacto encontrado: " + c);
+        } else {
+            System.out.println("Contacto no encontrado.");
+        }
+    }
 
+    // Método para eliminar un contacto
+    public void eliminarContacto(Contacto c) {
+        if (contactos.remove(c)) {
+            System.out.println("Contacto eliminado.");
+        } else {
+            System.out.println("Este contacto no existe.");
+        }
+    }
+
+    // Método para modificar teléfono de un contacto
+    public void modificarTelefono(String nombre, String apellido, String nuevoTelefono) {
+        for (Contacto c : contactos) {
+            if (c.getNombre().equalsIgnoreCase(nombre) && c.getApellido().equalsIgnoreCase(apellido)) {
+                c = new Contacto(nombre, apellido, nuevoTelefono);
+                System.out.println("Teléfono modificado.");
+                return;
+            }
+        }
+        System.out.println("Contacto no encontrado.");
+    }
+
+    // Verifica si la agenda está llena
+    public boolean agendaLlena() {
+        return contactos.size() >= tamañoMaximo;
+    }
+
+    // Muestra el espacio libre en la agenda
+    public void espacioLibres() {
+        System.out.println("Espacio libre en la agenda: " + (tamañoMaximo - contactos.size()));
+    }
 }

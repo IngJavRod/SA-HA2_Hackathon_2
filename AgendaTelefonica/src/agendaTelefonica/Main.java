@@ -67,7 +67,7 @@ public class Main {
                 break;
 
             case 6:
-                agenda.espaciosLibres();
+                agenda.espacioLibres();
                 break;
 
             case 7:
