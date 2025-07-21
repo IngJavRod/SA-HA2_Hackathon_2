@@ -1,3 +1,4 @@
+package agendaTelefonica;
 public class Contacto {
     private String nombre;
     private String apellido;
