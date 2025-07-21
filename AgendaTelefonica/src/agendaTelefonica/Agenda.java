@@ -38,10 +38,23 @@ public class Agenda {
             System.out.println("La agenda está vacía.");
             return;
         }
+
+        // Ordenamos los contactos alfabéticamente por nombre y apellido
         contactos.stream()
-            .sorted((c1, c2) -> c1.toString().compareToIgnoreCase(c2.toString()))
-            .forEach(System.out::println);
+                .sorted((c1, c2) -> {
+                    // Primero comparamos por nombre
+                    int nombreComparison = c1.getNombre().compareToIgnoreCase(c2.getNombre());
+
+                    // Si los nombres son iguales, comparamos por apellido
+                    if (nombreComparison == 0) {
+                        return c1.getApellido().compareToIgnoreCase(c2.getApellido());
+                    }
+
+                    return nombreComparison;
+                })
+                .forEach(System.out::println);
     }
+
     // Método para buscar un contacto
     public void buscarContacto(String nombre, String apellido) {
         // Creamos un contacto con el mismo nombre y apellido (sin importar teléfono)
