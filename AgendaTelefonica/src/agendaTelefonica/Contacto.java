@@ -1,4 +1,5 @@
 package agendaTelefonica;
+
 public class Contacto {
     private String nombre;
     private String apellido;
@@ -22,6 +23,11 @@ public class Contacto {
 
     public String getTelefono() {
         return telefono;
+    }
+
+    // Setter para el teléfono
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     // Método para comparar contactos (basado en nombre y apellido)
